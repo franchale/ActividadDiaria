@@ -20,6 +20,8 @@
 			
 			<div class="row">
 				<a href="tipoactividad_abc.php" class="btn btn-primary">Tipo de Actividad</a>
+				<a href="departamento_abc.php" class="btn btn-primary">Departamento</a>
+				<a href="recursohumano_abc.php" class="btn btn-primary">Recurso Humano</a>
 			</div>
 			
 			<br>

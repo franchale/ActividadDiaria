@@ -14,7 +14,7 @@
     $descripcion = $_POST['descripcion'];
 	$baja = $_POST['baja'];
 	
-	$resultado = $mysqli->prepare("call sptipoactividad_guardar('$descripcion', '$baja');");
+	$resultado = $mysqli->prepare("call spdepartamento_guardar('$descripcion', '$baja');");
 	$resultado->execute();	
 	
 ?>
@@ -41,7 +41,7 @@
 						<h3>ERROR AL GUARDAR</h3>
 					<?php } ?>
 					
-					<a href="tipoactividad_abc.php" class="btn btn-primary">Regresar</a>
+					<a href="departamento_abc.php" class="btn btn-primary">Regresar</a>
 					
 				</div>
 			</div>

@@ -10,7 +10,7 @@
 			$where = "WHERE Descripcion LIKE '%$valor'";
 		}
 	}
-	$sql = "SELECT * FROM tipoactividad $where";
+	$sql = "SELECT * FROM departamento $where";
 	$resultado = $mysqli->query($sql);
 	
 ?>
@@ -27,11 +27,11 @@
 		
 		<div class="container">
 			<div class="row">
-				<h2 style="text-align:center">Actividad Diaria - Tipos de Actividad</h2>
+				<h2 style="text-align:center">Actividad Diaria - Departamento</h2>
 			</div>
 			
 			<div class="row">
-				<a href="tipoactividad_nuevo.php" class="btn btn-primary">Nuevo Registro</a>
+				<a href="departamento_nuevo.php" class="btn btn-primary">Nuevo Registro</a>
 				<a href="index.php" class="btn btn-primary">Regresar</a>
 				
 				<br>
@@ -54,7 +54,7 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>Tipo actividad ID</th>
+							<th>Departamento ID</th>
 							<th>Descripcioón</th>
 							<th>Fecha Creación</th>
 							<th>Baja</th>
@@ -66,7 +66,7 @@
 					<tbody>
 						<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 							<tr>
-								<td><?php echo $row['TipoActividadId']; ?></td>
+								<td><?php echo $row['DepartamentoId']; ?></td>
 								<td><?php echo $row['Descripcion']; ?></td>
 								<td><?php echo $row['FechaCreacion']; ?></td>
 								<td><?php 
@@ -79,9 +79,8 @@
 										//echo $row['Baja']; 
 									?>
 								</td>
-								<td><a href="tipoactividad_modificar.php?id=<?php echo $row['TipoActividadId']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
-								<td><a href="#" data-href="tipoactividad_baja.php?id=<?php echo $row['TipoActividadId']; ?>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span></a></td>
-								<td><a href="consume_ws_conphp.php"><span class="glyphicon glyphicon-pencil"></span></a></td>
+								<td><a href="departamento_modificar.php?id=<?php echo $row['DepartamentoId']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+								<td><a href="#" data-href="departamento_baja.php?id=<?php echo $row['DepartamentoId']; ?>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span></a></td>
 							</tr>
 						<?php } ?>
 					</tbody>

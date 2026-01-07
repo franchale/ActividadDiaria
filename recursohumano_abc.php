@@ -2,15 +2,16 @@
 	require 'conexion.php';
 	
 	$where = "";
-	
+
 	if(!empty($_POST))
 	{
 		$valor = $_POST['campo'];
 		if(!empty($valor)){
-			$where = "WHERE Descripcion LIKE '%$valor'";
+			$where = "WHERE a.Nombre LIKE '%$valor'";
 		}
 	}
-	$sql = "SELECT * FROM tipoactividad $where";
+
+	$sql = "SELECT a.*, b.DepartamentoId, b.Descripcion as DescripcionDepartamento FROM recursohumano a INNER JOIN departamento b on a.DepartamentoId = b.DepartamentoId $where Order By Nombre";
 	$resultado = $mysqli->query($sql);
 	
 ?>
@@ -27,11 +28,11 @@
 		
 		<div class="container">
 			<div class="row">
-				<h2 style="text-align:center">Actividad Diaria - Tipos de Actividad</h2>
+				<h2 style="text-align:center">Actividad Diaria - Recurso Humano</h2>
 			</div>
 			
 			<div class="row">
-				<a href="tipoactividad_nuevo.php" class="btn btn-primary">Nuevo Registro</a>
+				<a href="recursohumano_nuevo.php" class="btn btn-primary">Nuevo Registro</a>
 				<a href="index.php" class="btn btn-primary">Regresar</a>
 				
 				<br>
@@ -40,7 +41,7 @@
 				<hr>
 				
 				<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
-					<b>Descripción: </b><input type="text" id="campo" name="campo" />
+					<b>Nombre: </b><input type="text" id="campo" name="campo" />
 					<input type="submit" id="enviar" name="enviar" value="Buscar" class="btn btn-info" />
 				</form>
 
@@ -54,8 +55,9 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>Tipo actividad ID</th>
-							<th>Descripcioón</th>
+							<th>Recurso Humano ID</th>
+							<th>Nombre</th>
+                            <th>Departamento</th>
 							<th>Fecha Creación</th>
 							<th>Baja</th>
 							<th></th>
@@ -66,8 +68,9 @@
 					<tbody>
 						<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 							<tr>
-								<td><?php echo $row['TipoActividadId']; ?></td>
-								<td><?php echo $row['Descripcion']; ?></td>
+								<td><?php echo $row['RecursoHumanoId']; ?></td>
+                                <td><?php echo $row['Nombre']; ?></td>
+								<td><?php echo $row['DescripcionDepartamento']; ?></td>
 								<td><?php echo $row['FechaCreacion']; ?></td>
 								<td><?php 
 										if ($row['Baja'] == 0) {
@@ -79,9 +82,10 @@
 										//echo $row['Baja']; 
 									?>
 								</td>
-								<td><a href="tipoactividad_modificar.php?id=<?php echo $row['TipoActividadId']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
-								<td><a href="#" data-href="tipoactividad_baja.php?id=<?php echo $row['TipoActividadId']; ?>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span></a></td>
-								<td><a href="consume_ws_conphp.php"><span class="glyphicon glyphicon-pencil"></span></a></td>
+
+								<td><a href="recursohumano_modificar.php?id=<?php echo $row['RecursoHumanoId']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+								<td><a href="#" data-href="recursohumano_baja.php?id=<?php echo $row['RecursoHumanoId']; ?>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span></a></td>
+							
 							</tr>
 						<?php } ?>
 					</tbody>
@@ -96,7 +100,7 @@
 					
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Actividad diaria | Tipo de actividad</h4>
+						<h4 class="modal-title" id="myModalLabel">Actividad diaria | Recurso Humano</h4>
 					</div>
 					
 					<div class="modal-body">

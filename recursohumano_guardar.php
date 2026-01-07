@@ -11,15 +11,14 @@
 	$resultado = $mysqli->query($sql);
 	*/
 
-    $descripcion = $_POST['descripcion'];
+    $nombre = $_POST['nombre'];
+    $departamentoId = $_POST['departamentos'];
 	$baja = $_POST['baja'];
 	
-	$resultado = $mysqli->prepare("call sptipoactividad_guardar('$descripcion', '$baja');");
+	$resultado = $mysqli->prepare("call spRecursoHumano_guardar('$nombre', '$departamentoId', '$baja');");
 	$resultado->execute();	
 	
 ?>
-
-
 
 <html lang="es">
 	<head>
@@ -41,7 +40,7 @@
 						<h3>ERROR AL GUARDAR</h3>
 					<?php } ?>
 					
-					<a href="tipoactividad_abc.php" class="btn btn-primary">Regresar</a>
+					<a href="recursohumano_abc.php" class="btn btn-primary">Regresar</a>
 					
 				</div>
 			</div>
